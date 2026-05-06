@@ -8,6 +8,8 @@ public class CustomerRequest {
     private String customerPhone;
     private String customerAddress;
 
+    private String companyName;
+
     public String getCustomerName() {
         return customerName;
     }
@@ -46,5 +48,13 @@ public class CustomerRequest {
 
     public void setCustomerAddress(String customerAddress) {
         this.customerAddress = customerAddress;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 }

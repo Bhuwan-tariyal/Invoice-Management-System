@@ -23,6 +23,7 @@ public class CustomerService {
         customer.setCustomerEmail(request.getCustomerEmail());
         customer.setCustomerPhone(request.getCustomerPhone());
         customer.setCustomerAddress(request.getCustomerAddress());
+        customer.setCompanyName(request.getCompanyName());
 
         // 🔥 encrypt password
         customer.setPassword(passwordEncoder.encode(request.getPassword()));
