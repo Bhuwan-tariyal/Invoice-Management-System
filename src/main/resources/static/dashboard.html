@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tariyal Dashboard</title>
+
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+<div id="loader-wrapper">
+    <div style="text-align: center;">
+        <div class="main-loader"></div>
+        <p style="font-family: 'Plus Jakarta Sans'; font-weight: 600; color: #1b2559; margin-top: 10px;">Processing...</p>
+    </div>
+</div>
+
+<!-- Navbar -->
+<div class="navbar">
+    <div class="header-left">
+        <div class="logo-container">
+            <!-- If you have a logo file, replace the icon below with:
+                 <img src="your-logo.png" class="company-logo"> -->
+            <i class="fa-solid fa-layer-group"></i>
+        </div>
+        <div class="brand-info">
+            <span class="brand-name">Tariyal</span>
+            <span class="brand-subtext">IT Solution</span>
+        </div>
+    </div>
+
+    <div class="nav-links">
+        <a onclick="showSection('home')">Home</a>
+        <a onclick="showSection('about')">About</a>
+
+<!--        <button class="icon-btn" onclick="openModal()" title="Download Invoice">-->
+<!--            <i class="fa-solid fa-download"></i>-->
+<!--        </button>-->
+
+<!--        <button class="icon-btn" onclick="openStudentModal()" title="Add Student">-->
+<!--            <i class="fa-solid fa-user-plus"></i>-->
+<!--        </button>-->
+
+<!--        <button class="icon-btn" onclick="openInvoiceModal()" title="Create Invoice">-->
+<!--            <i class="fa-solid fa-file-invoice-dollar"></i>-->
+<!--        </button>-->
+
+        <button class="icon-btn" onclick="loadProfile()" title="Profile">
+            <i class="fa-solid fa-user"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Content -->
+<div class="stats-container">
+    <!-- Total Students -->
+    <div class="stat-card">
+        <div class="stat-icon blue">
+            <i class="fa-solid fa-user-graduate"></i>
+        </div>
+        <div class="stat-info">
+            <p class="stat-title">Total Students</p>
+            <h2 id="totalStudents">1,240</h2>
+        </div>
+    </div>
+
+    <!-- Total Invoices -->
+    <div class="stat-card">
+        <div class="stat-icon green">
+            <i class="fa-solid fa-file-invoice"></i>
+        </div>
+        <div class="stat-info">
+            <p class="stat-title">Total Invoices</p>
+            <h2 id="totalInvoices">856</h2>
+        </div>
+    </div>
+
+    <!-- Total Revenue -->
+    <div class="stat-card">
+        <div class="stat-icon purple">
+            <i class="fa-solid fa-dollar-sign"></i>
+        </div>
+        <div class="stat-info">
+            <p class="stat-title">Total Revenue</p>
+            <h2 id="totalRevenue">$45,200</h2>
+        </div>
+    </div>
+</div>
+
+<main class="dashboard-wrapper">
+
+    <!-- WELCOME PROFILE SECTION -->
+    <section class="welcome-banner">
+        <div class="welcome-content">
+            <h1>Welcome back, <span id="userName">Teacher Name</span>! 👋</h1>
+            <p>Track student enrollment, manage class billings, and generate professional PDF invoices for your students in just a few clicks.</p>
+
+            <div class="action-group">
+                <!-- Create Student -->
+                <button class="btn-action primary" onclick="openStudentModal()" >
+                    <i class="fa-solid fa-user-plus"></i> Add Student
+                </button>
+                <!-- Create Invoice -->
+                <button class="btn-action" onclick="openInvoiceModal()">
+                    <i class="fa-solid fa-file-circle-plus"  ></i> Create Invoice
+                </button>
+                <!-- Download PDF -->
+                <button class="btn-action" onclick="openDownloadInvoiceModal()">
+                    <i class="fa-solid fa-file-pdf" ></i> Download Reports
+                </button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div class="container">
+    <div class="stats-container">
+
+
+        <div class="card">
+            <div class="table-header">
+                <h3>Recent Invoices</h3>
+            </div>
+
+            <table class="invoice-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Student</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Hours</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+
+                <tbody id="invoiceTableBody">
+                <!-- Data will come here -->
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+    <div id="home" class="card">
+        <h2 id="customerName">Welcome </h2>
+        <p>Manage students, invoices and downloads easily.</p>
+    </div>
+
+    <div id="about" class="card hidden">
+        <section class="about-section">
+
+            <div class="container">
+
+                <h1 class="title">About Invoice Manager</h1>
+
+                <p class="subtitle">
+                    A simple and powerful invoice generation system built for small businesses and freelancers.
+                </p>
+
+                <div class="grid">
+
+                    <div class="card">
+                        <h2>📄 What It Does</h2>
+                        <p>
+                            This application helps you create, manage, and download professional invoices in PDF format
+                            with just a few clicks.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h2>⚡ Key Features</h2>
+                        <ul>
+                            <li>Create invoices instantly</li>
+                            <li>Auto calculation of amounts</li>
+                            <li>Download as PDF</li>
+                            <li>Customer-based invoice tracking</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h2>🎯 Purpose</h2>
+                        <p>
+                            Built to simplify billing workflow and reduce manual effort for businesses handling multiple clients.
+                        </p>
+                    </div>
+
+                    <div class="card">
+                        <h2>👨‍💻 Tech Stack</h2>
+                        <p>
+                            Spring Boot, Java, HTML, CSS, JavaScript, REST APIs, PDF generation
+                        </p>
+                    </div>
+
+                </div>
+
+                <button id="toggleBtn">Show More</button>
+
+                <div id="extraInfo" class="extra hidden">
+                    <p>
+                        This system is designed with scalability in mind and can be extended to include payment tracking,
+                        GST reports, and analytics dashboard in future updates.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+</div>
+
+<!-- Add Student Modal -->
+<div id="studentModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 style="font-size: 20px;">Add New Student</h2>
+            <span onclick="closeStudentModal()" style="cursor:pointer; color:#a3aed0; font-size: 24px;">&times;</span>
+        </div>
+        <div class="form-group" id="fg-firstName">
+            <label>First Name</label>
+            <div class="input-wrapper"><i class="fa-regular fa-user"></i><input type="text" id="firstName" placeholder="John"></div>
+            <span class="error-msg">First name is required</span>
+        </div>
+        <div class="form-group" id="fg-lastName">
+            <label>Last Name</label>
+            <div class="input-wrapper"><i class="fa-regular fa-user"></i><input type="text" id="lastName" placeholder="Doe"></div>
+            <span class="error-msg">Last name is required</span>
+        </div>
+        <div class="form-group" id="fg-parentName">
+            <label>Parent / Guardian Name</label>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-person-breastfeeding"></i>
+                <input type="text" id="parentName" placeholder="Full name of parent">
+            </div>
+            <span class="error-msg">Parent name is required</span>
+        </div>
+        <div class="form-group" id="fg-email">
+            <label>Email Address</label>
+            <div class="input-wrapper"><i class="fa-regular fa-envelope"></i><input type="email" id="email" placeholder="john@example.com"></div>
+            <span class="error-msg">Enter a valid email address</span>
+        </div>
+        <div class="form-group" id="fg-phoneNumber">
+            <label>Phone Number</label>
+            <div class="input-wrapper"><i class="fa-solid fa-phone"></i><input type="text" id="phoneNumber" placeholder="+1 234-567-890"></div>
+            <span class="error-msg">Please enter a valid phone number</span>
+        </div>
+        <div class="modal-footer">
+            <button onclick="closeStudentModal()" style="background:none; border:none; color:#a3aed0; cursor:pointer; font-weight:600;">Cancel</button>
+            <button class="btn-save" onclick="saveStudent()">Save Student</button>
+        </div>
+    </div>
+</div>
+
+<!-- Add Student Modal -->
+<!--<div id="studentModal" class="modal">-->
+<!--    <div class="modal-content">-->
+<!--        <span class="close" onclick="closeStudentModal()">&times;</span>-->
+
+<!--        <h2>➕ Add Student</h2>-->
+
+<!--        <div class="form-group">-->
+<!--            <label>First Name</label>-->
+<!--            <input type="text" id="firstName">-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label>Last Name</label>-->
+<!--            <input type="text" id="lastName">-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label>Email</label>-->
+<!--            <input type="email" id="email">-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label>Phone</label>-->
+<!--            <input type="text" id="phoneNumber">-->
+<!--        </div>-->
+
+<!--        <button class="btn-primary" onclick="saveStudent()">Save Student</button>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!-- Invoice Modal -->
+<!-- Modal: Create Invoice -->
+<div id="invoiceModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 style="font-size: 20px;">💰 Create Invoice</h2>
+            <span onclick="closeInvoiceModal()" style="cursor:pointer; color:#a3aed0; font-size: 24px;">&times;</span>
+        </div>
+
+        <div class="form-group" id="err-studentIdInvoice"><label>Student*</label>
+            <div class="input-wrapper"><i class="fa-solid fa-graduation-cap"></i>
+                <select id="studentIdInvoice"><option value="">Select Student</option></select>
+            </div>
+            <span class="error-msg">Selection required</span>
+        </div>
+        <div class="form-group" id="err-date"><label>Date*</label>
+            <div class="input-wrapper"><i class="fa-regular fa-calendar"></i><input type="text" id="date" placeholder="dd/mm/yyyy"></div>
+            <span class="error-msg">Format: dd/mm/yyyy</span>
+        </div>
+        <div class="form-row">
+            <div class="form-group" id="err-amount"><label>Amount*</label>
+                <div class="input-wrapper"><i class="fa-solid fa-dollar-sign"></i><input type="number" id="amount" placeholder="0.00"></div>
+            </div>
+            <div class="form-group" id="err-hours"><label>Hours*</label>
+                <div class="input-wrapper"><i class="fa-regular fa-clock"></i><input type="number" id="hours" placeholder="0"></div>
+            </div>
+        </div>
+        <div class="form-group" id="err-description"><label>Description*</label>
+            <div class="input-wrapper"><i class="fa-solid fa-pen"></i><input type="text" id="description" placeholder="e.g., Python Web Dev Course"></div>
+        </div>
+        <div class="modal-footer">
+            <button onclick="closeInvoiceModal()" style="background:none; border:none; color:#a3aed0; cursor:pointer; font-weight:600;">Cancel</button>
+            <button class="btn-save" onclick="saveInvoice()">Generate Invoice</button>
+        </div>
+    </div>
+</div>
+
+<!--<div id="invoiceModal" class="modal">-->
+<!--    <div class="modal-content">-->
+<!--        <span class="close" onclick="closeInvoiceModal()">&times;</span>-->
+
+<!--        <h2>💰 Create Invoice</h2>-->
+
+<!--        <div class="form-group">-->
+<!--            <label>Student</label>-->
+<!--            <select id="studentIdInvoice"></select>-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--            <label>Date</label>-->
+<!--            <input type="text" id="date" placeholder="dd/MM/yyyy">-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label>Amount</label>-->
+<!--            <input type="number" id="amount">-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label>Hours</label>-->
+<!--            <input type="number" id="hours">-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label>Description</label>-->
+<!--            <input type="text" id="description">-->
+<!--        </div>-->
+
+<!--        <button class="btn-primary" onclick="saveInvoice()">Save Invoice</button>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!-- Download Modal -->
+<div id="invoiceDownloadModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 style="font-size: 20px;">📄 Download Invoice</h2>
+            <span onclick="closeDownloadInvoiceModal()" style="cursor:pointer; color:#a3aed0; font-size: 24px;">&times;</span>
+        </div>
+
+        <div class="form-group" id="fg-studentIdInvoiceDownload">
+            <label>Student</label>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <select id="studentIdInvoiceDownload">
+                    <option value="">Select a student</option>
+                    <option value="1">John Doe</option>
+                    <option value="2">Jane Smith</option>
+                </select>
+            </div>
+            <span class="error-msg">Please select a student</span>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group" id="fg-fromDate">
+                <label>From Date</label>
+                <div class="input-wrapper">
+                    <i class="fa-regular fa-calendar"></i>
+                    <input type="text" id="fromDate" placeholder="dd/MM/yyyy">
+                </div>
+                <span class="error-msg">Required</span>
+            </div>
+            <div class="form-group" id="fg-toDate">
+                <label>To Date</label>
+                <div class="input-wrapper">
+                    <i class="fa-regular fa-calendar-check"></i>
+                    <input type="text" id="toDate" placeholder="dd/MM/yyyy">
+                </div>
+                <span class="error-msg">Required</span>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button onclick="closeDownloadInvoiceModal()" style="background:none; border:none; color:#a3aed0; cursor:pointer; font-weight:600;">Cancel</button>
+            <button class="btn-save" onclick="downloadInvoice()">Download</button>
+        </div>
+    </div>
+</div>
+<!--<div id="invoiceDownloadModal" class="modal">-->
+<!--    <div class="modal-content">-->
+<!--        <span class="close" onclick="closeModal()">&times;</span>-->
+
+<!--        <h2>📄 Download Invoice</h2>-->
+
+<!--        <div class="form-group">-->
+<!--            <label>Student</label>-->
+<!--            <select id="studentIdInvoiceDownload"></select>-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label>From Date</label>-->
+<!--            <input type="text" id="fromDate" placeholder="dd/MM/yyyy">-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label>To Date</label>-->
+<!--            <input type="text" id="toDate" placeholder="dd/MM/yyyy">-->
+<!--        </div>-->
+
+<!--        <button class="btn-primary" onclick="downloadInvoice()">Download</button>-->
+<!--    </div>-->
+<!--</div>-->
+<div id="profileDrawer" class="profile-drawer">
+
+    <div class="drawer-header">
+        <h3>Profile</h3>
+        <span class="drawer-close" onclick="closeProfile()">&times;</span>
+    </div>
+
+    <div class="drawer-body">
+
+        <div class="profile-info">
+            <i class="fa-solid fa-user profile-avatar"></i>
+
+            <h3 id="profileName"></h3>
+            <p id="profileEmail"></p>
+        </div>
+
+        <div class="profile-details">
+            <p><b>Phone:</b> <span id="profilePhone"></span></p>
+            <p><b>Address:</b> <span id="profileAddress"></span></p>
+
+        </div>
+
+        <div class="profile-actions">
+            <div class="action-item" onclick="logout()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="drawerOverlay" class="drawer-overlay" onclick="closeProfile()"></div>
+<script src="/js/dashboard.js"></script>
+</body>
+</html>
