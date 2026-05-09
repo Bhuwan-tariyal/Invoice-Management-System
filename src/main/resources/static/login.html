@@ -3,36 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Login</title>
+    <title>Tariyal IT Solution | Login</title>
+
+    <!-- External Assets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <!-- 🔥 External CSS -->
     <link rel="stylesheet" href="/css/login.css">
 </head>
-
 <body>
 
-<div class="container">
-    <h2>Customer Login</h2>
-
-    <form id="loginForm">
-        <div class="input-group">
-            <label>Email</label>
-            <input type="email" id="email" placeholder="Enter your email" required>
+<div class="auth-card" id="authCard">
+    <!-- Brand Header Section -->
+    <div class="brand-header">
+        <div class="logo-container">
+            <i class="fa-solid fa-layer-group"></i>
         </div>
-
-        <div class="input-group">
-            <label>Password</label>
-            <input type="password" id="password" placeholder="Enter your password" required>
+        <div class="brand-info">
+            <span class="brand-name">Tariyal</span>
+            <span class="brand-subtext">IT Solution</span>
         </div>
-
-        <button type="submit">Login</button>
-    </form>
-
-    <div class="result" id="result"></div>
-
-    <div class="footer">
-        Don't have an account? <a href="#">Register</a>
     </div>
+    <!-- login Section   -->
+    <div id="loginSection">
+        <form id="loginForm">
+            <h2>Sign In</h2>
+            <p class="subtitle">Access your IT solutions dashboard.</p>
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-envelope field-icon"></i>
+                    <input type="email" id="email" placeholder="mail@tariyal.com" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label for="password">Password</label>
+                    <a onclick="showSection('forgotSection')"  class="forgot-link">Forgot?</a>
+                </div>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-lock field-icon"></i>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                    <i class="fa-solid fa-eye toggle-pass" id="eyeIcon"></i>
+                </div>
+            </div>
+
+            <button type="submit" class="login-btn" id="submitBtn">Sign In</button>
+        </form>
+
+        <div id="result"></div>
+
+        <div class="footer-links">
+            New here? <a href="#">Create account</a>
+        </div>
+    </div>
+
+    <!-- 2. FORGOT: CHECK EMAIL SECTION -->
+    <div id="forgotSection" class="hidden">
+        <h2>Account Recovery</h2>
+        <p class="subtitle">Enter your email to send opt in your account.</p>
+        <form id="sendOTPForm">
+            <div class="input-group">
+                <label>Registration Email</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-envelope field-icon"></i>
+                    <input type="email" id="recoveryEmail" placeholder="mail@tariyal.com" required>
+                </div>
+            </div>
+            <button type="submit" class="auth-btn">Send OTP</button>
+        </form>
+        <div class="footer-links"><a onclick="showSection('loginSection')"><i class="fa-solid fa-arrow-left"></i> Back to Login</a></div>
+    </div>
+
+    <!-- 2. ENTER OTP -->
+    <div id="otpSection" class="hidden">
+        <h2>Verification Code</h2>
+        <p class="subtitle">We've sent a 6-digit code to your email. Please enter it below.</p>
+        <form id="varifyOtpForm">
+            <div class="otp-container">
+                <input type="text" class="otp-input" maxlength="1" pattern="\d*" inputmode="numeric">
+                <input type="text" class="otp-input" maxlength="1" pattern="\d*" inputmode="numeric">
+                <input type="text" class="otp-input" maxlength="1" pattern="\d*" inputmode="numeric">
+                <input type="text" class="otp-input" maxlength="1" pattern="\d*" inputmode="numeric">
+                <input type="text" class="otp-input" maxlength="1" pattern="\d*" inputmode="numeric">
+                <input type="text" class="otp-input" maxlength="1" pattern="\d*" inputmode="numeric">
+            </div>
+            <button type="submit" class="auth-btn">Verify OTP</button>
+        </form>
+        <div class="footer-links">Didn't get code? <a href="#">Resend</a></div>
+    </div>
+
+    <!-- 3. RESET: SET NEW PASSWORD SECTION -->
+    <div id="resetSection" class="hidden">
+        <h2>New Password</h2>
+        <p class="subtitle">Email verified! Please set a strong new password for your account.</p>
+        <form id="setNewPasswordForm">
+            <div class="input-group">
+                <label>New Password</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-shield-halved field-icon"></i>
+                    <input type="password" id="newPass" placeholder="••••••••" required>
+                    <i class="fa-solid fa-eye toggle-pass" onclick="togglePass('newPass', this)"></i>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Confirm Password</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-circle-check field-icon"></i>
+                    <input type="password" id="confirmPass" placeholder="••••••••" required>
+                </div>
+            </div>
+            <button type="submit" class="auth-btn">Update Password</button>
+        </form>
+    </div>
+
+    <!-- Unified Message Box -->
+    <div id="statusMsg" class="msg-box"></div>
 </div>
 
 <!-- 🔥 External JS -->

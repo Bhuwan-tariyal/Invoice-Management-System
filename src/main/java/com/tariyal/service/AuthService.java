@@ -24,17 +24,14 @@ public class AuthService {
 
 
     public String login(LoginRequest request) {
-
         Customer customer = customerDAO
                 .findByCustomerEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
-
         // 🔥 password match
         if (!passwordEncoder.matches(request.getPassword(), customer.getPassword())) {
             throw new RuntimeException("Invalid password");
         }
-
-          return jwtUtil.generateToken(customer.getCustomerEmail());
-        }
+        return jwtUtil.generateToken(customer.getCustomerEmail());
+    }
 
 }

@@ -400,3 +400,16 @@ function validateDownloadInvoiceDetails() {
  function clearErrors() {
      document.querySelectorAll('.form-group').forEach(el => el.classList.remove('error'));
  }
+
+ function toggleExtra() {
+     const extra = document.getElementById('extraInfo');
+     const btn = document.getElementById('toggleBtn');
+
+     if (extra.classList.contains('hidden')) {
+         extra.classList.remove('hidden');
+         btn.textContent = 'Hide Roadmap';
+     } else {
+         extra.classList.add('hidden');
+         btn.textContent = 'Show System Roadmap';
+     }
+ }
