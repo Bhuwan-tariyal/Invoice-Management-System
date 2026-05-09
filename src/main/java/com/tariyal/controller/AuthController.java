@@ -39,8 +39,13 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(
             @Valid @RequestBody LoginRequest request) {
-        String token = authService.login(request);
-        return ResponseEntity.ok(Map.of("token", token));
+        String token;
+        try {
+            token = authService.login(request);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.OK).body(Map.of("success",false,"error","Invalid username and password"));
+        }
+        return ResponseEntity.ok(Map.of("success",true,"token", token));
     }
 
     //  Send OTP

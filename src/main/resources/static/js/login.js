@@ -24,13 +24,19 @@ document.getElementById("loginForm").addEventListener("submit", function(e) {
     })
     .then(data => {
         result.style.color = "green";
-        result.innerText = data.message || "Login successful 🎉";
-        // 🔥 store login state
-        localStorage.setItem("token", data.token);
-        // 🔥 redirect
-        setTimeout(() => {
-            window.location.href = "/dashboard";
-        }, 1000);
+        if(data.success) {
+            result.innerText = data.message || "Login successful 🎉";
+            // store login state
+            localStorage.setItem("token", data.token);
+            // redirect
+            setTimeout(() => {
+                window.location.href = "/dashboard";
+            }, 1000);
+        } else {
+            result.style.color = "red";
+            result.innerText = "Please enter correct credentials";
+        }
+
     })
     .catch(err => {
         result.style.color = "red";
@@ -177,4 +183,12 @@ function triggerError(message) {
     statusMsg.className = 'msg-box';
     statusMsg.innerHTML = '';
     document.querySelectorAll('input').forEach(i => i.classList.remove('input-error'));
+}
+
+
+function togglePass(id, icon) {
+    const input = document.getElementById(id);
+    input.type = input.type === 'password' ? 'text' : 'password';
+    icon.classList.toggle('fa-eye');
+    icon.classList.toggle('fa-eye-slash');
 }
