@@ -31,6 +31,7 @@ public class DashBoardService {
         dashBoardResponse.setTotalStudents(studentDAO.countByCustomerId(customer.getId()));
         dashBoardResponse.setTotalRevenue(invoiceDAO.getTotalAmountByCustomerId(customer));
         dashBoardResponse.setTotalInvoices(invoiceDAO.countByCustomerId(customer.getId()));
+        dashBoardResponse.setCustomerName(customer.getCustomerName());
         return dashBoardResponse;
     }
 }

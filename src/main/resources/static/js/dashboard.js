@@ -277,6 +277,7 @@ function loadDashboardStats() {
         document.getElementById("totalStudents").innerText = data.totalStudents;
         document.getElementById("totalInvoices").innerText = data.totalInvoices;
         document.getElementById("totalRevenue").innerText = "$" + data.totalRevenue;
+        document.getElementById("userName").innerText = data.customerName;
     })
     .catch(err => console.error(err))
     .finally(() => {

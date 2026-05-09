@@ -30,6 +30,7 @@ public class StudentService {
         student.setLastName(request.getLastName());
         student.setEmail(request.getEmail());
         student.setPhoneNumber(request.getPhoneNumber());
+        student.setParentName(request.getParentName());
 
         // 🔥 IMPORTANT: link student with customer
         student.setCustomer(customer);
