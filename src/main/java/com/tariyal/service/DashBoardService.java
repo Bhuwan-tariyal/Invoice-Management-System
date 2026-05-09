@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class DashBoardService {
@@ -29,7 +30,9 @@ public class DashBoardService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
         DashBoardResponse dashBoardResponse = new DashBoardResponse();
         dashBoardResponse.setTotalStudents(studentDAO.countByCustomerId(customer.getId()));
-        dashBoardResponse.setTotalRevenue(invoiceDAO.getTotalAmountByCustomerId(customer));
+        BigDecimal totalAmount = invoiceDAO.getTotalAmountByCustomerId(customer);
+        totalAmount = Objects.isNull(totalAmount)? BigDecimal.valueOf(0) :totalAmount;
+        dashBoardResponse.setTotalRevenue(totalAmount);
         dashBoardResponse.setTotalInvoices(invoiceDAO.countByCustomerId(customer.getId()));
         dashBoardResponse.setCustomerName(customer.getCustomerName());
         return dashBoardResponse;
