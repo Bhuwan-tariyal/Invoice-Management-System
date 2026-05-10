@@ -28,7 +28,7 @@ function loadProfile() {
         }
     })
     .then(res => {
-       if (res.status === 403) {
+       if (res.status === 401) {
           logout();
        } else if (!res.ok) throw new Error("Failed");
         return res.json();
@@ -84,7 +84,7 @@ function saveStudent() {
         body: JSON.stringify(student)
     })
     .then(res => {
-        if (res.status === 403) {
+        if (res.status === 401) {
            logout();
         } else if (!res.ok) throw new Error("Failed");
         return res.json();
@@ -177,7 +177,7 @@ function loadStudents(dropdownId) {
             body: JSON.stringify(invoice)
         })
         .then(res => {
-            if (res.status === 403) {
+            if (res.status === 401) {
                logout();
             } else if (!res.ok) throw new Error("Failed");
             return res.text();
@@ -267,7 +267,7 @@ function loadDashboardStats() {
         }
     })
     .then(res => {
-        if (res.status === 403) {
+        if (res.status === 401) {
            logout();
         } else if (!res.ok) throw new Error("Failed");
         return res.json();
@@ -289,37 +289,6 @@ function loadDashboardStats() {
 function loadInvoices() {
 
     const token = localStorage.getItem("token");
-
-//    fetch("/api/invoices", {
-//        headers: {
-//            "Authorization": "Bearer " + token
-//        }
-//    })
-//    .then(res => res.json())
-//    .then(data => {
-//
-//        let rows = "";
-//
-//        data.forEach(inv => {
-//            rows += `
-//                <tr>
-//                    <td>${inv.id}</td>
-//                    <td>${inv.studentName}</td>
-//                    <td>₹${inv.amount}</td>
-//                    <td>${inv.date}</td>
-//                    <td>${inv.hours}</td>
-//                    <td>
-//                        <button class="table-btn" onclick="downloadSingle(${inv.id})">
-//                            <i class="fa-solid fa-download"></i>
-//                        </button>
-//                    </td>
-//                </tr>
-//            `;
-//        });
-//
-//        document.getElementById("invoiceTableBody").innerHTML = rows;
-//    })
-//    .catch(err => console.error(err));
 }
 
 document.addEventListener("DOMContentLoaded", function () {
