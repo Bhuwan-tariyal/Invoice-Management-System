@@ -143,7 +143,10 @@ document.getElementById('setNewPasswordForm').addEventListener('submit', (e) => 
         body: JSON.stringify({ password: p1.value })
     })
     .then(res => {
-       if (!res.ok) throw new Error("Failed");
+        if(res.status === 401){
+            localStorage.removeItem("token");
+            window.location.href = "/login";
+        }else if (!res.ok) throw new Error("Failed");
        return res.json();
     })
     .then(data => {
