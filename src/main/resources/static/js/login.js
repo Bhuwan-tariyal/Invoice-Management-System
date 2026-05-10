@@ -64,7 +64,13 @@ document.getElementById('sendOTPForm').addEventListener('submit', (e) => {
     })
     .then(data => {
         // Success: Move to OTP entry screen
-        showSection('otpSection');
+        if(data.success) {
+            showSection('otpSection');
+        } else {
+            triggerError("Invalid Email Address");
+            btn.innerHTML = 'Send Code';
+            btn.disabled = false;
+        }
     })
     .catch(err => {
         triggerError("Invalid Email Address");
@@ -95,9 +101,15 @@ document.getElementById('varifyOtpForm').addEventListener('submit', (e) => {
        return res.json();
     })
     .then(data => {
-        // Success: Move to OTP entry screen
-        localStorage.setItem("ResetToken", data.token);
-        showSection('resetSection');
+        if(data.success) {
+            // Success: Move to OTP entry screen
+            localStorage.setItem("ResetToken", data.token);
+            showSection('resetSection');
+        } else {
+            triggerError("Invalid Otp. Please try again.");
+            btn.innerHTML = 'Varify Otp';
+            btn.disabled = false;
+        }
     })
     .catch(err => {
         triggerError("Invalid Otp. Please try again.");

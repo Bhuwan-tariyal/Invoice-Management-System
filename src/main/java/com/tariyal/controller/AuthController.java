@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -52,16 +53,14 @@ public class AuthController {
     public ResponseEntity<?> requestOtp(@RequestBody Map<String, String> request) {
         String email = request.get("email");
         // Logic: Check if email exists in DB here...
-        Customer customer = customerDAO.findByCustomerEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        if(Objects.isNull(customer)) {
-           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error","Invalid Email Address"));
+        Optional<Customer> customer = customerDAO.findByCustomerEmail(email);
+        if(customer.isEmpty()) {
+           return ResponseEntity.status(HttpStatus.OK).body(Map.of("success",false,"error","Invalid Email Address"));
         }
         String otp = otpService.generateOtp(email);
         otpService.sendOtpEmail(email, otp);
 
-        return ResponseEntity.ok(Map.of("message", "OTP sent successfully"));
+        return ResponseEntity.ok(Map.of("success",true,"message", "OTP sent successfully"));
     }
 
     //  Verify OTP
@@ -72,9 +71,9 @@ public class AuthController {
 
         if (otpService.verifyOtp(email, otp)) {
             String token = jwtUtil.generateToken(email);
-            return ResponseEntity.ok(Map.of("message", "OTP verified. Proceed to reset.","token", token));
+            return ResponseEntity.ok(Map.of("success",true,"message", "OTP verified. Proceed to reset.","token", token));
         } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "Invalid OTP"));
+            return ResponseEntity.status(HttpStatus.OK).body(Map.of("success",false,"error", "Invalid OTP"));
         }
     }
 
