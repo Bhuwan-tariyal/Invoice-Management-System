@@ -26,7 +26,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())  // 🔥 disable CSRF for now
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**","/login.html","/api/customers/create","/login", "/css/**", "/js/**","/dashboard","/dashboard.html").permitAll() // allow these
+                        .requestMatchers("/api/auth/**","/login.html","/api/customers/create","/login", "/css/**", "/js/**","/dashboard","/dashboard.html","/favicon.ico").permitAll() // allow these
                         .anyRequest().authenticated()
                 ).addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 

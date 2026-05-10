@@ -2,7 +2,6 @@ package com.tariyal.service;
 
 import com.tariyal.dao.CustomerDAO;
 import com.tariyal.dto.LoginRequest;
-import com.tariyal.dto.LoginResponse;
 import com.tariyal.entity.Customer;
 import com.tariyal.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;

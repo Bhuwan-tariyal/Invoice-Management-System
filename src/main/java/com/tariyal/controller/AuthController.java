@@ -2,7 +2,6 @@ package com.tariyal.controller;
 
 import com.tariyal.dao.CustomerDAO;
 import com.tariyal.dto.LoginRequest;
-import com.tariyal.dto.LoginResponse;
 import com.tariyal.entity.Customer;
 import com.tariyal.service.AuthService;
 import com.tariyal.service.OtpService;

@@ -4,7 +4,6 @@ import com.tariyal.dao.CustomerDAO;
 import com.tariyal.dto.CustomerRequest;
 import com.tariyal.dto.CustomerResponse;
 import com.tariyal.entity.Customer;
-import com.tariyal.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -44,10 +43,9 @@ public class CustomerService {
         return response;
     }
 
-    public String resetPassword(String email, String password) {
+    public void resetPassword(String email, String password) {
         Customer customer = customerDAO.findByCustomerEmail(email).orElseThrow(() -> new RuntimeException("Customer not found"));
         customer.setPassword(passwordEncoder.encode(password));
         customerDAO.save(customer);
-        return "Password reset successfully!";
     }
 }
